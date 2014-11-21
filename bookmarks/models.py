@@ -20,9 +20,15 @@ class Category(models.Model):
     user = models.ForeignKey(User, related_name="categories")
     name = models.CharField(max_length=30)
 
+    def __unicode__(self):
+        return u"{} for {}".format(self.name, self.user)
+
 
 class Bookmark(models.Model):
     category = models.ForeignKey(Category, related_name="bookmarks")
     url = models.URLField()
     title = models.CharField(max_length=50)
     description = models.TextField()
+
+    def __unicode__(self):
+        return u"{} for {}".format(self.title, self.category)
