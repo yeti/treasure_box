@@ -1,0 +1,19 @@
+.header {
+    margin-top: 54px;
+}
+.categoryRow {
+	border-bottom: 1px solid gray;
+	padding-bottom: 30px;
+}
+.newTreasure, .treasureItem {
+	border: 1px solid black;
+	float: left;
+	margin-right: 20px;
+	height: 150px;
+	text-align: center;
+	width: 150px;
+}
+.newTreasure {
+	cursor: pointer;
+}
+

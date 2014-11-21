@@ -1,0 +1,1 @@
+var treasureBox = angular.module("treasureBox", ['ui.bootstrap']);
