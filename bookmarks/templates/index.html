@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 {% load staticfiles mezzanine_tags blog_tags keyword_tags i18n %}
-<html>
+<html ng-app="treasureBox">
 	<head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,73 +36,8 @@
 		<script src="{% static "js/controllers/index.js" %}"></script>
 	</head>
 	<body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">TREASURE BOX</a>
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Submit</a></li>
-                        <li><a href="#">Search</a></li>
-                        <li><a href="#">Profile</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-		<div ng-app="treasureBox">
-            {% verbatim %}
-			<div class="container header">
-				<div class="row">
-					<div class="col-md-12">
-						<h2>Favorite sites</h2>
-                        <hr>
-					</div>
-				</div>
-			</div>
-
-			<div class="container" id="indexContainer" ng-controller="indexController">
-				<script type="text/ng-template" id="addTreasure.html">
-					<div class="modal-body">
-						<div>
-							<h3>
-								Paste your URL here
-							</h3>
-							<input placeholder="www.treasurebox.io" ng-model="newTreasure.url" />
-							<h3>
-								Title
-							</h3>
-							<input placeholder="Favorites" ng-model="newTreasure.title" />
-							<h4>
-								Description
-							</h4>
-							<input placeholder="Hey, keep it short" ng-model="newTreasure.description" />
-							<h3>
-								Categories
-							</h3>
-							<div>
-								<input type="radio" value="{{ newCategory }}" ng-model="newTreasure.categorySelection"><input placeholder="Add a new category" ng-model="newCategory">
-								<div ng-repeat="category in categories">
-									<input type="radio" value="{{ category }}" ng-model="newTreasure.categorySelection"/>{{ category }}
-								</div>
-							</div>
-							<button ng-click="saveTreasure()">Save
-							</button>
-						</div>
-					</div>
-				</script>
-				<div class="row categoryRow" ng-repeat="category in categories track by $index">
-					<div class="col-md-12">
-						<h3>{{ category }}</h3>
-					</div>
-					<div class="col-md-3">
-						<div class="newTreasure" ng-click="newTreasure(category);">
-							Add a new treasure +
-						</div>
-					</div>
-					<treasure ng-repeat="treasureSite in treasures | filter:category:true track by $index" data="treasureSite"></treasure>
-				</div>
-			</div>
-            {% endverbatim %}
-		</div>
+        {% block content %}
+        {% endblock %}
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{% static "js/vendor/jquery-1.10.2.min.js" %}"><\/script>')</script>
