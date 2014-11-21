@@ -3,8 +3,27 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-
+from rest_framework import routers
 from mezzanine.core.views import direct_to_template
+from bookmarks.api.views import CategoryViewSet, BookmarkViewSet
+
+
+admin.autodiscover()
+
+router = routers.DefaultRouter()
+router.register(r'categories', CategoryViewSet, base_name='categories')
+router.register(r'bookmarks', BookmarkViewSet, base_name='bookmarks')
+
+ap1_v1 = patterns('',
+    # Treasure box views
+    url(r'^', include(router.urls)),
+
+    # Auth views
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # Library views
+    url(r'^', include('rest_user.rest_user.urls')),
+)
 
 
 admin.autodiscover()
@@ -20,6 +39,7 @@ urlpatterns = i18n_patterns("",
 )
 
 urlpatterns += patterns('',
+    url(r'^api/v1/', include(ap1_v1)),
 
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.

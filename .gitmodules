@@ -1,0 +1,9 @@
+[submodule "rest_core"]
+	path = rest_core
+	url = git@github.com:yeti/rest_core.git
+[submodule "rest_user"]
+	path = rest_user
+	url = git@github.com:yeti/rest_user.git
+[submodule "manticore_django"]
+	path = manticore_django
+	url = git@github.com:yeti/manticore-django.git

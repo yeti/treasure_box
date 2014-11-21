@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from bookmarks.models import User, Category, Bookmark
+
+admin.site.register(User)
+admin.site.register(Category)
+admin.site.register(Bookmark)
