@@ -25,6 +25,7 @@ treasureBox.controller("indexController", function($scope, $modal) {
 
 	$scope.treasures = treasures;
 	$scope.categories = categories;
+	$scope.matchingTreasures = [];
 
 	$scope.newTreasure = function(category) {
 		var modalInstance = $modal.open({
@@ -57,6 +58,18 @@ treasureBox.controller("indexController", function($scope, $modal) {
 	$scope.$on('treasureSaved', function(event, args) {
 		console.log(args);
 	});
+
+
+	var match = function(searchText, obj) {
+		return _.some(obj, function(value) {
+			return value.indexOf(searchText) != -1;
+		});
+	};
+
+	$scope.$watch('searchText', function() {
+		$scope.matchingTreasures = _.filter($scope.treasures, _.partial(match, $scope.searchText));
+	})
+
 });
 
 treasureBox.controller('modalInstanceController', function($scope, $modalInstance, $rootScope, category, categories) {

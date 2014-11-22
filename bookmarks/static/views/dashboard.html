@@ -1,8 +1,16 @@
+
+
+    
 <div class="container header">
     <div class="row">
         <div class="col-md-12">
             <h2>Favorite sites</h2>
             <hr>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-7'>
+            <input type='text' placeholder='Search...' class="form-control" ng-model='searchText'>
         </div>
     </div>
 </div>
@@ -37,7 +45,7 @@
             </div>
         </div>
     </script>
-    <div class="row categoryRow" ng-repeat="category in categories track by $index">
+    <div class="row categoryRow" ng-repeat="category in categories track by $index" ng-show='!searchText'>
         <div class="col-md-12">
             <h3>{{ category }}</h3>
         </div>
@@ -47,5 +55,10 @@
             </div>
         </div>
         <treasure ng-repeat="treasureSite in treasures | filter:category:true track by $index" data="treasureSite"></treasure>
+    </div>
+
+    <div class='row' ng-show='searchText'>
+        <br>
+        <treasure ng-repeat="treasureSite in matchingTreasures" data="treasureSite"></treasure>
     </div>
 </div>
