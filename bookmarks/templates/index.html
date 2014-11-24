@@ -37,10 +37,11 @@
 		<!-- Directives -->
 		<script src="{% static "js/directives/treasure.js" %}"></script>
 		<!-- Controllers -->
+        <script src="{% static "js/controllers/application.js" %}"></script>
 		<script src="{% static "js/controllers/index.js" %}"></script>
         <script src="{% static "js/controllers/login.js" %}"></script>
 	</head>
-	<body>
+	<body ng-controller="applicationController">
         {% block content %}
         {% endblock %}
 

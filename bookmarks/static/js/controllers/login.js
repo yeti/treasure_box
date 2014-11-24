@@ -29,7 +29,7 @@ function loginController($scope, $http, $cookieStore, $location) {
                 }).success(function(data, status, headers, config) {
                     console.log('second success');
                     $cookieStore.put("userCookie", data.access_token);
-//                    $location.path("/meeting/");
+                    $location.path("/");
                 }).error(function(data, status, headers, config) {
                     console.log("Something went wrong");
                     console.log(data);

@@ -15,6 +15,35 @@
             </div>
         </div>
     </nav>
+    <script type="text/ng-template" id="addTreasure.html">
+        <div class="modal-body">
+            <div>
+                <h3>
+                    Paste your URL here
+                </h3>
+                <input placeholder="www.treasurebox.io" ng-model="newTreasure.url" />
+                <h3>
+                    Title
+                </h3>
+                <input placeholder="Favorites" ng-model="newTreasure.title" />
+                <h4>
+                    Description
+                </h4>
+                <input placeholder="Hey, keep it short" ng-model="newTreasure.description" />
+                <h3>
+                    Categories
+                </h3>
+                <div>
+                    <input type="radio" value="{{ newCategory }}" ng-model="newTreasure.categorySelection"><input placeholder="Add a new category" ng-model="newCategory">
+                    <div ng-repeat="category in categories">
+                        <input type="radio" value="{{ category.name }}" ng-model="newTreasure.categorySelection"/>{{ category.name }}
+                    </div>
+                </div>
+                <button ng-click="saveTreasure()">Save
+                </button>
+            </div>
+        </div>
+    </script>
     <div ng-view>
     {% endverbatim %}
     </div>

@@ -25,14 +25,16 @@ treasureBox.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 }]);
 
-treasureBox.run(function run($rootScope, $cookieStore, Restangular) {
+treasureBox.run(function run($rootScope, $cookieStore, Restangular, $http) {
     var authToken = $cookieStore.get('userCookie');
     if (authToken) {
         $rootScope.authToken = authToken;
-        Restangular.setDefaultHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authToken
-        });
+//        Restangular.setDefaultHeaders({
+//            'Content-Type': 'application/json',
+//            'Authorization': 'Bearer ' + authToken
+//        });
+        $http.defaults.headers.common['Content-Type'] = 'application/json';
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + authToken;
     }
 });
 
