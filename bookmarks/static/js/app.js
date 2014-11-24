@@ -20,6 +20,11 @@ treasureBox.config(['$routeProvider', function($routeProvider) {
         otherwise({redirectTo: '/'});
 }]);
 
+treasureBox.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+}]);
+
 treasureBox.run(function run($rootScope, $cookieStore, Restangular) {
     var authToken = $cookieStore.get('userCookie');
     if (authToken) {
