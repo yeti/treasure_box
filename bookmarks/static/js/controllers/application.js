@@ -12,7 +12,7 @@ treasureBox.controller("applicationController", function($scope, $http, $modal) 
         console.log(error);
     });
 
-	$scope.newTreasure = function(category) {
+	$scope.newTreasure = function() {
         console.log('new treasure');
 //        var data = {
 //            category_name: "Social",
@@ -31,9 +31,6 @@ treasureBox.controller("applicationController", function($scope, $http, $modal) 
 			templateUrl: 'addTreasure.html',
 			controller: 'modalInstanceController',
 			resolve: {
-				category: function() {
-					return category;
-				},
 				categories: function() {
 					return $scope.categories;
 				}
@@ -41,22 +38,22 @@ treasureBox.controller("applicationController", function($scope, $http, $modal) 
 		});
 
 		modalInstance.result.then(function(newTreasure) {
+            console.log('closing modal');
 			console.log(newTreasure);
-			if (_.contains($scope.categories, newTreasure.categorySelection)) {
+			if (_.find($scope.categories, {name: newTreasure.categorySelection})) {
 				console.log('found the category');
 				$scope.treasures.push(newTreasure);
 			}
 			else {
 				console.log('creating a new category');
-				$scope.categories.push(newTreasure.categorySelection);
+				$scope.categories.push({name: newTreasure.categorySelection});
 				$scope.treasures.push(newTreasure);
 			}
 		});
 	};
 });
 
-treasureBox.controller('modalInstanceController', function($scope, $http, $modalInstance, $rootScope, category, categories) {
-	$scope.category = category;
+treasureBox.controller('modalInstanceController', function($scope, $http, $modalInstance, $rootScope, categories) {
 	$scope.categories = categories;
 
 	$scope.saveTreasure = function() {
@@ -69,7 +66,7 @@ treasureBox.controller('modalInstanceController', function($scope, $http, $modal
 
         $http.post('api/v1/bookmarks/', data).success(function(response) {
             console.log(response);
-//            $modalInstance.close($scope.newTreasure);
+            $modalInstance.close($scope.newTreasure);
         }).error(function(data) {
             console.log(data);
         });

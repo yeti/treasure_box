@@ -12,11 +12,6 @@
         <div class="col-md-12">
             <h3>{{ category.name }}</h3>
         </div>
-        <div class="col-md-3">
-            <div class="newTreasure" ng-click="newTreasure(category.name);">
-                Add a new treasure +
-            </div>
-        </div>
         <treasure ng-repeat="treasureSite in treasures | filter:category.name:true track by $index" data="treasureSite"></treasure>
     </div>
 </div>
