@@ -8,9 +8,9 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">TREASURE BOX</a>
                 <ul class="nav navbar-nav">
-                    <li><a ng-click="newTreasure();">Submit</a></li>
-                    <li><a href="#">Search</a></li>
-                    <li><a href="#">Profile</a></li>
+                    <li><a href ng-click="newTreasure();">Submit</a></li>
+                    <li><a href ng-click="newSearch();">Search</a></li>
+                    <!--<li><a href="#">Profile</a></li>-->
                 </ul>
             </div>
         </div>
@@ -39,7 +39,22 @@
                         <input type="radio" value="{{ category.name }}" ng-model="newTreasure.categorySelection"/>{{ category.name }}
                     </div>
                 </div>
-                <button ng-click="saveTreasure()">Save
+                <button ng-click="saveTreasure()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="search.html">
+        <div class="modal-body">
+            <div>
+                <h3>
+                    Search
+                </h3>
+                <input placeholder="Keyword here..." ng-model="searchTerm" />
+
+                <button ng-click="findTreasure()">
+                    Search
                 </button>
             </div>
         </div>
