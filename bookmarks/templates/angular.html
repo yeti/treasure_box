@@ -34,9 +34,9 @@
                     Categories
                 </h3>
                 <div>
-                    <input type="radio" value="{{ newCategory }}" ng-model="newTreasure.categorySelection"><input placeholder="Add a new category" ng-model="newCategory">
+                    <input type="radio" name="category" value="{{ newCategory }}" ng-model="newTreasure.categorySelection"><input placeholder="Add a new category" ng-model="newCategory">
                     <div ng-repeat="category in categories">
-                        <input type="radio" value="{{ category.name }}" ng-model="newTreasure.categorySelection"/>{{ category.name }}
+                        <input type="radio" name="category" value="{{ category.name }}" ng-model="newTreasure.categorySelection"/>{{ category.name }}
                     </div>
                 </div>
                 <button ng-click="saveTreasure()">

@@ -15,6 +15,7 @@ treasureBox.controller("applicationController", function($scope, $http, $modal, 
 		var addTreasure = $modal.open({
 			templateUrl: 'addTreasure.html',
 			controller: 'addTreasureController',
+            backdropClass: 'modalBackdrop',
 			resolve: {
 				categories: function() {
 					return $scope.categories;
@@ -36,7 +37,8 @@ treasureBox.controller("applicationController", function($scope, $http, $modal, 
     $scope.newSearch = function() {
         var newSearch = $modal.open({
             templateUrl: 'search.html',
-            controller: 'searchModalController'
+            controller: 'searchModalController',
+            backdropClass: 'modalBackdrop'
         });
 
         newSearch.result.then(function(searchTerm) {
