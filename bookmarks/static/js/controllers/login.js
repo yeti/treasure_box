@@ -1,14 +1,16 @@
-function loginController($scope, $http) {
+function loginController($scope, $http, $cookieStore, $location) {
     $scope.username = "";
     $scope.password = "";
 
     $scope.login = function() {
-        var authdata = base64.encode($scope.username + ':' + $scope.password);
-        $http.get("/login/", {headers: {"Authorization": "Basic " + authdata}}).
+        var authdata = btoa($scope.username + ':' + $scope.password);
+        console.log(authdata);
+        $http.get("api/v1/login/", {headers: {"Authorization": "Basic " + authdata}}).
             success(function(data, status, headers, config) {
+                console.log('first success');
                 $http({
                     method: "POST",
-                    url: "/o/token/",
+                    url: "api/v1/o/token/",
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     // Modify the `transformRequest` to url-encode the data (instead of passing in the request body)
                     transformRequest: function(obj) {
@@ -18,19 +20,20 @@ function loginController($scope, $http) {
                         return str.join("&");
                     },
                     data: {
-                        client_id: data[0].client_id,
-                        client_secret: data[0].client_secret,
+                        client_id: data.results[0].client_id,
+                        client_secret: data.results[0].client_secret,
                         grant_type: "password",
                         username: $scope.username,
                         password: $scope.password
                     }
                 }).success(function(data, status, headers, config) {
+                    console.log('second success');
                     $cookieStore.put("userCookie", data.access_token);
-                    $location.path("/meeting/");
+                    $location.path("/");
                 }).error(function(data, status, headers, config) {
                     console.log("Something went wrong");
                     console.log(data);
-                })
-            })
+                });
+            });
     };
 }

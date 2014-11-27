@@ -9,7 +9,7 @@ treasureBox.config(['$routeProvider', function($routeProvider) {
         }).
         when('/search', {
             templateUrl: '/static/views/search.html',
-            controller: 'searchController',
+//            controller: 'searchController',
             title: 'Search'
         }).
         when('/login', {
@@ -20,14 +20,17 @@ treasureBox.config(['$routeProvider', function($routeProvider) {
         otherwise({redirectTo: '/'});
 }]);
 
-treasureBox.run(function run($rootScope, $cookieStore, Restangular) {
+treasureBox.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+}]);
+
+treasureBox.run(function run($rootScope, $cookieStore, Restangular, $http) {
     var authToken = $cookieStore.get('userCookie');
     if (authToken) {
         $rootScope.authToken = authToken;
-        Restangular.setDefaultHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + authToken
-        });
+        $http.defaults.headers.common['Content-Type'] = 'application/json';
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + authToken;
     }
 });
 

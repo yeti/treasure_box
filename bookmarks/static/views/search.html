@@ -1,0 +1,13 @@
+<div class="container header">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Search results for "{{ filterSearchBy }}"</h2>
+            <hr>
+        </div>
+    </div>
+</div>
+<div class="container" id="searchContainer">
+   <div class="row">
+       <treasure ng-repeat="treasureSite in treasures | filter:filterSearchBy track by $index" data="treasureSite"></treasure>
+   </div>
+</div>

@@ -8,13 +8,57 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">TREASURE BOX</a>
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Submit</a></li>
-                    <li><a href="#">Search</a></li>
-                    <li><a href="#">Profile</a></li>
+                    <li><a href ng-click="newTreasure();">Submit</a></li>
+                    <li><a href ng-click="newSearch();">Search</a></li>
+                    <!--<li><a href="#">Profile</a></li>-->
                 </ul>
             </div>
         </div>
     </nav>
+    <script type="text/ng-template" id="addTreasure.html">
+        <div class="modal-body">
+            <div>
+                <h3>
+                    Paste your URL here
+                </h3>
+                <input placeholder="www.treasurebox.io" ng-model="newTreasure.url" />
+                <h3>
+                    Title
+                </h3>
+                <input placeholder="Favorites" ng-model="newTreasure.title" />
+                <h4>
+                    Description
+                </h4>
+                <input placeholder="Hey, keep it short" ng-model="newTreasure.description" />
+                <h3>
+                    Categories
+                </h3>
+                <div>
+                    <input type="radio" name="category" value="{{ newCategory }}" ng-model="newTreasure.categorySelection"><input placeholder="Add a new category" ng-model="newCategory">
+                    <div ng-repeat="category in categories">
+                        <input type="radio" name="category" value="{{ category.name }}" ng-model="newTreasure.categorySelection"/>{{ category.name }}
+                    </div>
+                </div>
+                <button ng-click="saveTreasure()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="search.html">
+        <div class="modal-body">
+            <div>
+                <h3>
+                    Search
+                </h3>
+                <input placeholder="Keyword here..." ng-model="searchTerm" />
+
+                <button ng-click="findTreasure()">
+                    Search
+                </button>
+            </div>
+        </div>
+    </script>
     <div ng-view>
     {% endverbatim %}
     </div>

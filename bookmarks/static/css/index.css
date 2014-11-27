@@ -16,4 +16,7 @@
 .newTreasure {
 	cursor: pointer;
 }
-
+.modal-backdrop.in {
+    height: 100%;
+    opacity: 0.6;
+}
