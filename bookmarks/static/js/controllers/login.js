@@ -1,13 +1,11 @@
-function loginController($scope, $http, $cookieStore, $location) {
+function loginController($scope, $rootScope, $http, $cookieStore, $location) {
     $scope.username = "";
     $scope.password = "";
 
     $scope.login = function() {
         var authdata = btoa($scope.username + ':' + $scope.password);
-        console.log(authdata);
         $http.get("api/v1/login/", {headers: {"Authorization": "Basic " + authdata}}).
             success(function(data, status, headers, config) {
-                console.log('first success');
                 $http({
                     method: "POST",
                     url: "api/v1/o/token/",
@@ -27,11 +25,10 @@ function loginController($scope, $http, $cookieStore, $location) {
                         password: $scope.password
                     }
                 }).success(function(data, status, headers, config) {
-                    console.log('second success');
                     $cookieStore.put("userCookie", data.access_token);
+                    $rootScope.setAuthToken(data.access_token);
                     $location.path("/");
                 }).error(function(data, status, headers, config) {
-                    console.log("Something went wrong");
                     console.log(data);
                 });
             });

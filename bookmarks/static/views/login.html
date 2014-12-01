@@ -1,11 +1,20 @@
-<div class="container" id="loginContainer">
+<div class="container header">
     <div class="row">
         <div class="col-md-12">
+            <h2>Login!</h2>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="loginContainer">
+    <div class="row">
+        <div class="loginForm col-md-12">
             <div>
                 Username: <input ng-model="username" />
             </div>
             <div>
-                Password: <input ng-model="password" />
+                Password: <input type="password" ng-model="password" />
             </div>
             <button ng-click="login();">
                 Login

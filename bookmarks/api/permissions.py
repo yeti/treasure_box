@@ -8,4 +8,5 @@ class IsBookmarkOwner(permissions.IsAuthenticated):
     """
 
     def has_object_permission(self, request, view, obj):
+        print request.user
         return obj.category.user == request.user

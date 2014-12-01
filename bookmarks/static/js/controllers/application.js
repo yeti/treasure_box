@@ -1,16 +1,4 @@
-treasureBox.controller("applicationController", function($scope, $http, $modal, $location) {
-    $http.get('api/v1/categories').success(function(categoryData) {
-        $scope.categories = categoryData.results;
-    }).error(function(error) {
-        console.log(error);
-    });
-
-    $http.get('api/v1/bookmarks').success(function(bookmarkData) {
-        $scope.treasures = bookmarkData.results;
-    }).error(function(error) {
-        console.log(error);
-    });
-
+treasureBox.controller("applicationController", function($scope, $rootScope, $http, $modal, $location) {
 	$scope.newTreasure = function() {
 		var addTreasure = $modal.open({
 			templateUrl: 'addTreasure.html',
@@ -18,18 +6,18 @@ treasureBox.controller("applicationController", function($scope, $http, $modal, 
             backdropClass: 'modalBackdrop',
 			resolve: {
 				categories: function() {
-					return $scope.categories;
+					return $rootScope.categories;
 				}
 			}
 		});
 
 		addTreasure.result.then(function(newTreasure) {
-			if (_.find($scope.categories, {name: newTreasure.categorySelection})) {
-				$scope.treasures.push(newTreasure);
+			if (_.find($rootScope.categories, {name: newTreasure.category.name})) {
+				$rootScope.treasures.unshift(newTreasure);
 			}
 			else {
-				$scope.categories.push({name: newTreasure.categorySelection});
-				$scope.treasures.push(newTreasure);
+				$rootScope.categories.push({name: newTreasure.category.name});
+				$rootScope.treasures.unshift(newTreasure);
 			}
 		});
 	};
@@ -59,8 +47,8 @@ treasureBox.controller('addTreasureController', function($scope, $http, $modalIn
             url: $scope.newTreasure.url
         };
 
-        $http.post('api/v1/bookmarks/', data).success(function(bookmarkCollection) {
-            $modalInstance.close($scope.newTreasure);
+        $http.post('api/v1/bookmarks/', data).success(function(treasureResult) {
+            $modalInstance.close(treasureResult);
         }).error(function(errorResponse) {
             console.log(errorResponse);
         });

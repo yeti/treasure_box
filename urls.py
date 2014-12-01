@@ -1,7 +1,9 @@
 from __future__ import unicode_literals
+from django.conf import settings
 
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.static import static
 from django.contrib import admin
 from rest_framework import routers
 from mezzanine.core.views import direct_to_template
@@ -115,3 +117,6 @@ urlpatterns += patterns('',
 # pages can use JS, CSS and images.
 handler404 = "mezzanine.core.views.page_not_found"
 handler500 = "mezzanine.core.views.server_error"
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

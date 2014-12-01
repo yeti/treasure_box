@@ -29,6 +29,7 @@ class Bookmark(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=50)
     description = models.TextField()
+    screenshot = models.ImageField(upload_to='screenshots', blank=True, null=True)
 
     def __unicode__(self):
         return u"{} for {}".format(self.title, self.category)

@@ -1,3 +1,8 @@
-#searchContainer {
-    /*margin-top: 100px;*/
+.modal-body input[type=text] {
+    width: 300px;
+}
+
+.modal-body input[type=radio] {
+    margin-right: 10px;
+    margin-bottom: 15px;
 }
