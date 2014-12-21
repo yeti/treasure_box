@@ -31,7 +31,7 @@ FABRIC = {
         "REPO_BRANCH": "master",
         "LINUX_DISTRO": "wheezy",
     },
-    "development": {
+    "production": {
         "SSH_USER": "root", # SSH username
         "SSH_PASS": "", # SSH password (consider key-based authentication)
         "SSH_KEY_PATH": "", # Local path to SSH key file, for key-based auth
@@ -42,23 +42,23 @@ FABRIC = {
         "DEPLOY_DB_CLUSTER_SSH_KEY_PATH": "",
 
         # Yeti sandbox
-        "APPLICATION_HOSTS": ['127.0.0.1'], # List of hosts to deploy to
-        "DATABASE_HOSTS": ['127.0.0.1'],
-        "DOMAINS": ["127.0.0.1"], # Host for public site.
-        "DB_PASS": "treasurebox", # Live database password
+        "APPLICATION_HOSTS": ['162.209.60.116'], # List of hosts to deploy to
+        "DATABASE_HOSTS": ['162.209.60.116'],
+        "DOMAINS": ["treasurebox.io"], # Host for public site.
+        "DB_PASS": "tr3asu3r3B0x", # Live database password
         "ADMIN_PASS": "admin", # Live admin user password
         "SECRET_KEY": "DEV",
         "NEVERCACHE_KEY": "DEV",
 
         # shared application settings
-        "SITENAME": "Default",
-        "VIRTUALENV_HOME": "/root/envs", # Absolute remote path for virtualenvs
+        "SITENAME": "TreasureBox",
+        "VIRTUALENV_HOME": "/home/treasurebox", # Absolute remote path for virtualenvs
         "PROJECT_NAME": "treasure_box", # Unique identifier for project
         "REQUIREMENTS_PATH": "requirements.txt", # Path to pip requirements, relative to project
-        "GUNICORN_PORT": 8001, # Port gunicorn will listen on
+        "GUNICORN_PORT": 8555, # Port gunicorn will listen on
         "LOCALE": "en_US.UTF-8", # Should end with ".UTF-8"
         "REPO_URL": "git@github.com:yeti/treasure_box.git", # Git or Mercurial remote repo URL for the project
-        "REPO_BRANCH": "develop",
+        "REPO_BRANCH": "master",
         "LINUX_DISTRO": "wheezy",
     }
 }
