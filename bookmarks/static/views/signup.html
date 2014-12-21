@@ -1,0 +1,30 @@
+<div class="container header">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Signup!</h2>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="signupContainer">
+    <div class="row">
+        <div class="signupForm col-md-12">
+            <div>
+                Username: <input ng-model="username" />
+            </div>
+            <div>
+                Email: <input ng-model="email" />
+            </div>
+            <div>
+                Password: <input type="password" ng-model="password" />
+            </div>
+            <div>
+                Confirm Password: <input type="password" ng-model="confirmPassword" />
+            </div>
+            <button ng-click="signup();">
+                Signup
+            </button>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,11 @@ treasureBox.config(['$routeProvider', function($routeProvider) {
             controller: loginController,
             title: 'Login'
         }).
+        when('/signup', {
+            templateUrl: '/static/views/signup.html',
+            controller: signupController,
+            title: 'Signup'
+        }).
         otherwise({redirectTo: '/'});
 }]);
 
@@ -37,8 +42,8 @@ treasureBox.run(function($rootScope, $location, $cookieStore, Restangular, $http
             var authToken = $cookieStore.get('userCookie');
             if (authToken) {
                 $rootScope.setAuthToken(authToken)
-            } else if (next.templateUrl != "/static/views/login.html") {
-                // not going to #login, we should redirect now
+            } else if (next.indexOf('/#/login') < 0 && next.indexOf("/#/signup") < 0) {
+                // not going to login or signup, we should redirect!
                 $location.path("/login");
             }
         }

@@ -11,7 +11,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href ng-click="newTreasure();">Submit</a></li>
                 <li><a href ng-click="newSearch();">Search</a></li>
-                <!--<li><a href="#">Profile</a></li>-->
+                <li ng-if="!$root.authToken"><a href="#/login">Login</a></li>
+                <li ng-if="!$root.authToken"><a href="#/signup">Signup</a></li>
+                <li ng-if="$root.authToken"><a href ng-click="logout();">Logout</a></li>
             </ul>
         </div>
     </nav>

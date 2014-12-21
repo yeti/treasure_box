@@ -1,4 +1,4 @@
-treasureBox.controller("applicationController", function($scope, $rootScope, $http, $modal, $location) {
+treasureBox.controller("applicationController", function($scope, $rootScope, $http, $modal, $location, $cookieStore) {
 	$scope.newTreasure = function() {
 		var addTreasure = $modal.open({
 			templateUrl: 'addTreasure.html',
@@ -34,6 +34,13 @@ treasureBox.controller("applicationController", function($scope, $rootScope, $ht
              $scope.filterSearchBy = searchTerm;
         });
     };
+
+    $scope.logout = function() {
+        $rootScope.authToken = null;
+        $cookieStore.put("userCookie", null);
+        $http.defaults.headers.common['Authorization'] = null;
+        $location.path("/login");
+    }
 });
 
 treasureBox.controller('addTreasureController', function($scope, $http, $modalInstance, $rootScope, categories) {
